@@ -8,33 +8,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 import os
-
-
-
 
 
 ALLOWED_HOSTS = []
 ADMIN_MEDIA_PREFIX = '/static/admin/' 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
 DUOSHUO_SECRET = 'tyraan_blog'
-
 DUOSHUO_SHORTNAME = 'tyraan'
-
-
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,20 +28,27 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admindocs',   
+    'django.contrib.admindocs',
     
+        
     'tyraan',
-    'duoshuo',
-    
-)
+    'duoshuo',    
+                )
 SECRET_KEY = '9bn$ftw%u83(k9n=%26s+-w=68&#*@ek)k@yob+^n(c2hln01o'
 
 SITE_ID=2
 STATIC_URL = '/static/'
 
 TEMPLATE_DEBUG = True
+
 TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), '../templates').replace('\\','/'),
+      os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
+     )
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+#     'django.template.loaders.eggs.Loader',
 )
 
 
@@ -89,24 +81,19 @@ DATABASES = {
         'NAME': 'Tyraan_blog',
         'USER': 'tyraan',
         'PASSWORD': 'tyraan',
-        'HOST':'localhost',
-        'PORT':'3306',
+        'HOST':'',
+        'PORT':'',
     }
 }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+LANGUAGE_CODE = 'zh-cn'
+TIME_ZONE = 'Asia/Beijing'
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/

@@ -9,8 +9,8 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 def blog_list(request):
     blog_list = Blog.objects.all()
-    #分页处理
-    paginator = Paginator(blog_list,4) #4为每页显示的博文数量,可根据情况自行调整
+
+    paginator = Paginator(blog_list,4)
     page = request.GET.get('page')
     try:
         blogs = paginator.page(page)
@@ -18,6 +18,7 @@ def blog_list(request):
         blogs = paginator.page(1)
     except EmptyPage:
         blogs = paginator.page(paginator.num_pages)
+
     categories = Category.objects.all()
     tags = Tag.objects.all()
     # 访客数据采集
@@ -40,13 +41,13 @@ def blog_show(request,slug):
         blog = Blog.objects.get(slug=slug)
         categories = Category.objects.all()
         tags = Tag.objects.all()
-    except Blog.DoesNotExist:
+    except Blog.DoesNotExit:
         raise Http404
     return render_to_response("blog_show.html",{"blog":blog,'slug':slug,"categories":categories,"tags":tags})
 
 def category(request,slug):
     cut_category = get_object_or_404(Category,slug=slug)
-    blogs = cut_category.blog_set.all() #查找符合条件的所有文章 
+    blogs = cut_category.blog_set.all() #查找符合条件的所有文章  #Blog.objects.filter(category=cut_category)
     categories = Category.objects.all()
     tags = Tag.objects.all()
     return render_to_response("blog_list.html",{"blogs":blogs,"categories":categories,"tags":tags})
